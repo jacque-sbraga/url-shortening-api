@@ -27,7 +27,7 @@ ul {
 
 a {
     text-decoration: none;
-    color: inherit
+    color: inherit;
 }
 img {
     display: block;
@@ -56,7 +56,7 @@ img {
 
 .navbar ul {
     gap: 32px;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     align-items: center;
     font-weight: 700;
 }
@@ -65,9 +65,25 @@ img {
     color: var(--color-neutral-2);
     transition: color 0.3s ease;
     padding: 10px;
+    display: block;
 }
 .navbar-link:hover{
     color: var(--color-neutral-3)
+}
+
+.navbar-mobile{
+    width: 33px;
+    height: 33px;
+    cursor: pointer;
+    display: none;
+}
+
+.navbar.showMenu{
+    display: block;
+    background-color: var(--color-primary-2);
+    color: #fff;
+    border-radius: 10px;
+    margin-top: 22px;
 }
 /* utils */
 .container{
@@ -93,3 +109,53 @@ img {
 }
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
+
+@media (max-width: 992px){
+    .container{
+        max-width: 73vw;
+    }
+    .header {
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .navbar{
+        display: none;
+        flex-basis: 100%;
+        padding: 0 24px;
+    }
+    .navbar-mobile {
+        display: block;
+    }
+    .navbar ul{
+        flex-direction: column;
+        gap: 0;
+        text-align: center;
+    }
+    .navbar ul:nth-child(1){
+        padding: 20px 0 10px 0;
+    }
+    .navbar ul:nth-child(2){
+        padding: 10px 0 30px 0;
+        border-top: 1px solid var(--color-neutral-2)
+    }
+    .navbar ul li {
+        width: 100%;
+        margin: 10px;
+    }
+    .navbar-link{
+        color: #fff;
+        padding: 10px;
+    }
+    .navbar-link:hover{
+        color: var(--color-neutral-1)
+    }
+}
+
+@media (max-width: 768px){
+    .container{
+        width: 100vw;
+        max-width: 330px;
+    }
+}
+
+
