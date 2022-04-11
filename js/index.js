@@ -3,6 +3,7 @@ const bars = document.querySelector(".navbar-mobile");
 const handleMenu = (event) => {
     const navbar = document.querySelector(".navbar");
     const isActive = navbar.classList.contains("active");
+    console.log(event)
    
     if(event.type === "touchstart"){
         event.preventDefault();

@@ -2,3 +2,5 @@
 @import "./header/header.css";
 @import "./header/nav.css";
 @import "./footer/footer.css";
+@import "./main/main.css";
+@import "./main/form.css"
