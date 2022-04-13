@@ -39,6 +39,7 @@
         width: 100%;
         top: 70px;
         left: 0;
+        z-index: 3;   
     }
     .navbar.active{
         display: block;
@@ -48,7 +49,6 @@
         height: 406px;
         visibility: visible;
         overflow-y: auto;
-        z-index: 50;
     }
     .navbar-mobile {
         display: block;
