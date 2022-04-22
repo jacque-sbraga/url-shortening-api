@@ -26,14 +26,14 @@
 
 .section-bg{
     background-color: #f0f1f6;
-    padding: 207px 0 0 0;
+    padding: 105px 0 0 0;
     position: relative;
     margin-bottom: 20px;
 }
 
 .section-bg .container > .text {
     max-width: 45ch;
-    margin: 0 0 84px 0;
+    margin: 0 auto 84px auto;
 }
 
 .shorten{
@@ -141,7 +141,7 @@
         transform: translateX(-50%);
     }
     .section-bg{
-        padding: 160px 0 80px 0;
+        padding: 90px 0 80px 0;
     }
 
     .shorten{

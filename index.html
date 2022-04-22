@@ -51,23 +51,15 @@
     </section>
     <section class="section-bg">
       <div class="container shorten">
-        <div>
           <form action="" class="form-bg">
-            <input type="text" class="url-input" placeholder="Shorten a link here...">
-            <button class="btn-medium btn">Shorten It!</button>
+            <input type="text" class="url-input" placeholder="Shorten a link here..." data-urlInput>
+            <button class="btn-medium btn" data-shorten>Shorten It!</button>
           </form>
-          <p class="form-tips">Please add a link</p>
-        </div>
-        <div>
-          <ul class="url-list">
-            <li>
-              <p>www.google.com</p>
-              <div>
-                <p>https://shrt.ink/f478 <button type="button">Copy</button></p>
-              </div>
-            </li>
-          </ul>
-        </div>
+          <p class="form-tips" data-formTips>Please add a link</p>
+      </div>
+      <div class="container url-list">
+        <ul data-linkList>
+        </ul>
       </div>
       <div class="container">
         <h2 class="title-m color-neutral-3 text-center">Advanced Statistics</h2>

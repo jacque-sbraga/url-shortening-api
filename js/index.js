@@ -1,9 +1,69 @@
 const bars = document.querySelector(".navbar-mobile");
-// https://clipboardjs.com/
-// https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard
-// https://blog.erikfigueiredo.com.br/area-de-transferencia-copiar-e-colar-com-javascript-dica-rapida/#:~:text=Ctrl%2BC%20%7C%20Ctrl%2BV%20com%20JS!
-// https://www.delftstack.com/pt/howto/javascript/javascript-copy-to-clipboard/
-// https://www.youtube.com/watch?v=K7r2-hBydBE
+const linkList = document.querySelector("[data-linkList]")
+const btnShorten = document.querySelector("[data-shorten]");
+const localStorageLink = JSON.parse(localStorage.getItem("links"));
+let allLinks = localStorage.getItem("links") !== null ? localStorageLink : [];
+
+
+const validateInput = (inputValue) => {
+    const isValid = inputValue !== "";
+
+    return isValid;
+}
+
+const addClassInvalid = (input, textError) => {
+	input.classList.add("invalid-input");
+    textError.classList.add("message-erro");
+}
+
+
+const removeClassInvalid = (input, textError) => {
+	if(input.classList.contains("invalid-input")){
+		input.classList.remove("invalid-input");
+		textError.classList.remove("message-erro");
+	}
+}
+
+
+const createLinkItem = (original_link, short_link) => {
+	const linkList = document.querySelector("[data-linkList]");
+    const link = `
+					<li class="url-listItem flex">
+						<p class="url-original">${original_link}</p>
+						<div>
+							<p class="url-shortened" data-shortLink=${short_link}>${short_link}<button type="button" class="btn-medium">Copy</button></p>
+						</div>
+					</li>
+                `	
+	linkList.innerHTML += link;
+}
+
+
+const addLinkOnSession = (original_link, short_link) => {
+	const newLink = {
+		original_link,
+		short_link
+	} 
+	
+	allLinks.push(newLink);
+	updateLocalStorage()
+}
+
+const updateLocalStorage = () => localStorage.setItem("links", JSON.stringify(allLinks));
+
+const removeLocalStorage = () => {
+	const linkList = document.querySelector("[data-linkList]");
+	document.querySelectorAll("lista")
+	const removeLink = linkList.children[0];
+	
+	if(allLinks.length === 5){
+		linkList.removeChild(removeLink);
+		allLinks.shift();
+		updateLocalStorage();
+	}
+	
+}
+
 const handleMenu = (event) => {
     const navbar = document.querySelector(".navbar");
     const isActive = navbar.classList.contains("active");
@@ -17,5 +77,57 @@ const handleMenu = (event) => {
     navbar.classList.toggle("active");
 }
 
-bars.addEventListener("click", handleMenu);
-bars.addEventListener("touchstart", handleMenu, { passive: false })
+
+const init = () => {
+	window.addEventListener("load", () => {
+		if(allLinks.length > 0){
+			allLinks.map(({ original_link, short_link }) => {
+			createLinkItem(original_link, short_link);
+		})
+	}
+	});
+	
+	bars.addEventListener("click", handleMenu);
+	bars.addEventListener("touchstart", handleMenu, { passive: false });
+
+	linkList.addEventListener("click", (element) => {
+		const copyBtn = element.target;
+	
+		if(copyBtn.type === "button"){
+			const shortLink = copyBtn.parentElement.getAttribute("data-shortLink");
+			const input = document.createElement("input");
+			input.value = shortLink;
+			navigator.clipboard.writeText(input.value)
+			.then(() => console.log("successfully copied"))
+			.catch(err => console.log("Something went wrong", err))
+		}
+		
+	})
+	btnShorten.addEventListener("click", (event) => {
+		const urlInput = document.querySelector("[data-urlInput]");
+		const formTips = document.querySelector("[data-formTips]");
+		event.preventDefault();
+	
+		if(!validateInput(urlInput.value)){
+			addClassInvalid(urlInput, formTips)
+			return
+		}
+		removeClassInvalid(urlInput, formTips)
+	
+		fetch(`https://api.shrtco.de/v2/shorten?url=${urlInput.value}`)
+		.then(data => data.json(data)
+			.then(({ result: {original_link, short_link} } = response) => {	
+	
+				addLinkOnSession(original_link, short_link);
+				removeLocalStorage();
+				createLinkItem(original_link, short_link);	
+			}
+			)
+		)
+		urlInput.value = "";
+	})
+	
+}
+
+init()
+

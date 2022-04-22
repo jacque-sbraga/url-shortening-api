@@ -113,4 +113,8 @@ img {
     .title-xl{
         font-size: 3.2rem;
     }
+
+    .btn-medium{
+        border-radius: 5px;
+    }
 }

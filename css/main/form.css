@@ -35,9 +35,9 @@ form{
     color: rgba(244, 98, 98, 0.692);
 }
 
-.form-error{
+/* .form-error{
     gap: 42px;
-}
+} */
 
 .form-tips{
     visibility: hidden;
@@ -68,6 +68,9 @@ button.btn-medium {
         font-size: 1.5rem;
     }
 
+    .invalid-input{
+        margin-bottom: 20px;
+    }
     p.message-erro{
         top: 85px;
         left: 32px;
@@ -84,7 +87,7 @@ button.btn-medium {
     }
 
     .url-input{
-        border-radius: 6px;
+        border-radius: 5px;
     }
 }
 
