@@ -65,6 +65,7 @@ img {
     max-width: 1150px;
     margin: 0 auto;
 }
+
 .flex{
     display: flex;
 }
@@ -90,7 +91,7 @@ img {
 
 .btn-small:hover,
 .btn-medium:hover{
-    background-color: rgba(42, 207, 207, 0.623);
+    background-color: #9be3e2;
 }
 
 .text-center{
@@ -113,8 +114,10 @@ img {
     .title-xl{
         font-size: 3.2rem;
     }
+}
 
-    .btn-medium{
-        border-radius: 5px;
+@media (max-width: 375px) {
+    .title-m{
+        font-size: 2.4rem;
     }
 }

@@ -26,18 +26,15 @@ form{
     border-radius: 10px;
     border: none;
     font-family: inherit;
-    color: var(--color-neutral-3)
+    color: var(--color-neutral-3);
+    border: 3px solid transparent;
 }
 .invalid-input{
-    border: 3px solid var(--color-secondary);
+    border-color: var(--color-secondary);
 }
 .invalid-input::placeholder{
     color: rgba(244, 98, 98, 0.692);
 }
-
-/* .form-error{
-    gap: 42px;
-} */
 
 .form-tips{
     visibility: hidden;
@@ -87,6 +84,10 @@ button.btn-medium {
     }
 
     .url-input{
+        border-radius: 5px;
+    }
+
+    button.btn-medium {
         border-radius: 5px;
     }
 }
