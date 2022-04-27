@@ -51,6 +51,7 @@
     border-radius: 10px;
     padding: 80px 42px 42px;
     position: relative;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .card:nth-child(2){

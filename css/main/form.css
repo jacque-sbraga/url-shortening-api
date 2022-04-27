@@ -40,6 +40,10 @@ form{
     visibility: hidden;
 }
 
+button.copied {
+    background-color: var(--color-primary-2) !important;
+}
+
 p.message-erro{
     color: var(--color-secondary);
     font-size: 1.4rem;

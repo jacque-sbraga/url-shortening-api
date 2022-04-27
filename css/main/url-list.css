@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: space-between;
     font-size: 1.6rem;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .url-original{
@@ -20,7 +21,7 @@
 }
 .url-original,
 .url-shortened{
-    padding: 16px;
+    padding: 16px 24px;
 }
 
 .url-shortened button{

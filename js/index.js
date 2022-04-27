@@ -6,7 +6,15 @@ let allLinks = localStorage.getItem("links") !== null ? localStorageLink : [];
 
 
 const validateInput = (inputValue) => {
-    const isValid = inputValue !== "";
+	const pattern = new RegExp('^(https?:\\/\\/)?'+ 
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ 
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ 
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ 
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+
+    '(\\#[-a-z\\d_]*)?$','i');
+	
+	
+    const isValid = inputValue !== "" && !!pattern.test(inputValue);
 
     return isValid;
 }
@@ -96,6 +104,8 @@ const init = () => {
 		if(copyBtn.type === "button"){
 			const shortLink = copyBtn.parentElement.getAttribute("data-shortLink");
 			const input = document.createElement("input");
+			copyBtn.innerHTML = "Copied!";
+			copyBtn.classList.add("copied")
 			input.value = shortLink;
 			navigator.clipboard.writeText(input.value)
 			.then(() => console.log("successfully copied"))
@@ -116,15 +126,16 @@ const init = () => {
 	
 		fetch(`https://api.shrtco.de/v2/shorten?url=${urlInput.value}`)
 		.then(data => data.json(data)
-			.then(({ result: {original_link, short_link} } = response) => {	
+			.then(({ result: {short_link} } = response) => {	
 	
-				addLinkOnSession(original_link, short_link);
+				addLinkOnSession(urlInput.value, short_link);
 				removeLocalStorage();
-				createLinkItem(original_link, short_link);	
+				createLinkItem(urlInput.value, short_link);	
+				urlInput.value = "";
 			}
 			)
 		)
-		urlInput.value = "";
+		
 	})
 	
 }
